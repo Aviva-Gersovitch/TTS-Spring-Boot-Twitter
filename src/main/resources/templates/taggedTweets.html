@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset = "UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feed</title>
+
+    <th:block th:replace="/fragments/styleandscripts :: style_scripts" ></th:block>
+
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="/fragments/navbar"></div>
+        <h2>Tweets containing #<span th:text="${tag}"></span></h2>
+
+        <div class="list-group" th:each="tweet:@{tweetList}">
+
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a><small> <span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>
+    			</div>
+    			<p class="mb-1" th:utext="${tweet.message}"></p>
+                </div> 
+            </div>
+
+            <h5>@<span th:text="${tweet.user.username}"></span></h5>
+            <small> <span th:text = "${#dates.format(tweet.createdAt, M/d/yy")}></span> </small>
+            <p th:utext="${tweet.message}"></p>
+        </div>
+
+    </div>
+
+</body>
+
+
+</html>

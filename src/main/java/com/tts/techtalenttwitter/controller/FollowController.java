@@ -19,7 +19,7 @@ public class FollowController {
     private UserService userService;
 
     //All it will do currently is process requests for follows
-    //A user visits "/follow/{username" with a POST request
+    //A user visits "/follow/{username}" with a POST request
 
     @PostMapping(value= "/follow/{username}")
     public String follow(@PathVariable(value="username") String username, HttpServletRequest request) {

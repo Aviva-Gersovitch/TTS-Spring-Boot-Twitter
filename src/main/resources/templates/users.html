@@ -11,6 +11,19 @@
   <body>
     <div class="container">
       <div th:replace="/fragments/navbar"></div>
+      <ul class = "nav nav-tabs">
+      	<li role="presentation" th:classappend="${filter == 'all' ? 'active' : ''}">
+      		<a th:href = "@${/users}">All</a>
+      	</li>
+      	
+      	<li role="presentation" th:classappend="${filter == 'followers' ? 'active' : ''}">
+      		<a th:href = "@${/users?filter=followers}">Followers</a>
+      	</li>
+      	
+      	<li role="presentation" th:classappend="${filter == 'following' ? 'active' : ''}">
+      	<a th:href = "@${/users?filter=following}">Following</a>
+      </ul>
+      
       <h2>Users</h2>
       <div class="list-group" th:each="user:${users}">
         <a
@@ -27,10 +40,9 @@
                 <span th:text="${user.firstName}"></span>
                 <span th:text="${user.lastName}"></span>
                 <span th:if="${!followingStatus.containsKey(user.username)}"> (Me) </span>
-              
-              
-                
+               
               </h5>
+              
             </div>
             <div class="col col-sm-2 col-sm-offset-4 text-right">
               <h5 class="mb-1">
@@ -48,6 +60,14 @@
             </form>
           </div>
         </a>
+      </div>
+      
+      <div th:if="${#lists.isEmpty(users) and filter == 'followers'}">
+      <center><h3>You don't have any followers</h3></center>
+      </div>
+      
+      <div th:if="${#lists.isEmpty(users) and filter == 'following'}">
+      <center><h3>You aren't following anyone</h3></center>
       </div>
     </div>
   </body>

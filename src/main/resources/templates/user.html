@@ -68,7 +68,7 @@
           <h5>
             @<span th:text="${tweet.user.username}"></span>
             <small
-              th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"
+              th:text="${tweet.date}"
             ></small>
           </h5>
         </div>
